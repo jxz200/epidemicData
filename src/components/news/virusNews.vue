@@ -12,6 +12,9 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  created() {
+    console.log(this.virusNews);
+  },
   computed: {
     ...mapState(["virusNews"]),
   },
