@@ -1,11 +1,5 @@
 <template>
   <div>
-    <header>
-      <div>
-        <p>新型冠状病毒</p>
-        <h1>疫情实时数据报告</h1>
-      </div>
-    </header>
     <div class="views">
       <van-tabs
         scrollspy
@@ -25,17 +19,18 @@
 <script>
 import { mapMutations } from "vuex";
 import api from "@/api/index";
-// import VirusNews from "../news/virusNews";
-import VirusData from "../virusData/virusData.vue";
-import VirusMap from "../virusMap/virusMap.vue";
+import VirusNews from "@/components/news/virusNews";
+import VirusData from "@/components/virusData/virusData.vue";
+import VirusMap from "@/components/virusMap/virusMap.vue";
 export default {
   data() {
     return {
       virusNews: [],
     };
   },
+
   components: {
-    VirusNews: () => import("../news/virusNews"),
+    VirusNews,
     VirusData,
     VirusMap,
   },
@@ -63,6 +58,7 @@ export default {
     },
     //获取中国各地区疫情数据并储存在vuex中
     async StoreSectionData() {
+      // const result2 = {};
       // const result2 = await api.getSectionData(); //获取各地区数据
       console.log(result2);
       const sectionDataArray = result2.data.retdata;
@@ -90,24 +86,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-header {
-  height: 1rem;
-  background: url("../../assets/image/background.jpg") no-repeat;
-  background-size: cover;
-  color: white;
-  padding: 0.3rem 0.1rem;
-  letter-spacing: 0.01rem;
-  p {
-    font-size: 0.2rem;
-  }
-  h1 {
-    margin-top: 0.1rem;
-    font-size: 0.3rem;
-  }
-}
-van-tabs {
-  border-radius: 10px;
-}
 .views {
   margin-top: -0.2rem;
   border-radius: 0.15rem;

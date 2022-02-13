@@ -2,7 +2,7 @@ import base from "./base";
 import axios from "axios";
 
 const api = {
-  //获取基本疫情数据和新闻
+  //获取天行数据基本疫情数据和新闻
   getEpidemicData() {
     return axios.get(base.host + base.params);
   },

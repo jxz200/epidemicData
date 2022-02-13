@@ -57,6 +57,9 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  created() {
+    console.log(this.virusInfo);
+  },
   computed: {
     //获取store里的数据
     ...mapState(["virusInfo"]),
@@ -68,14 +71,14 @@ export default {
     },
     //每千分位加，
     comma(number) {
-      return parseInt(number).toLocaleString();
+      return number ? number.toLocaleString() : "";
     },
     //时间戳转换
     time(value) {
       let d = new Date(value);
       let year = d.getFullYear();
       let month = d.getMonth() + 1;
-      let day = d.getDay() - 1;
+      let day = d.getDate();
       let hour = d.getHours();
       let minute = d.getMinutes();
       let second = d.getSeconds();
@@ -96,16 +99,37 @@ div {
   }
   .time {
     color: gray;
-    padding-left: 0.1rem;
+    padding-left: 0.3rem;
     margin-top: 0.05rem;
+    font-size: 0.14rem;
+    display: flex;
+    align-items: center;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0.15rem;
+      // top: 0.1rem;
+      width: 0.15rem;
+      height: 0.15rem;
+      box-sizing: border-box;
+      background: #0faeb5;
+      border-radius: 0.15rem;
+      border-color: #cfeff0;
+      border: 0.03rem solid #cfeff0;
+    }
   }
 }
 .virusData {
+  border-radius: 0.2rem;
+  box-shadow: 0px 0px 0.04rem #7d7d7d;
+  height: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .firstLine,
   .secondLine {
     display: flex;
     justify-content: center;
-    padding: 0 0.1rem;
     ul {
       flex: 1;
       display: flex;

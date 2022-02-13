@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     virusInfo: {},
     sectionConfirmedData: [], //中国各地区累计确诊疫情数据
     sectionCurConfirmedData: [], //中国各地区现存确诊疫情数据
+    // province: "", //省份
   },
   getters: {},
   mutations: {
@@ -24,6 +25,9 @@ const store = new Vuex.Store({
     addSectionCurConfirmedData(state, payload) {
       state.sectionCurConfirmedData = payload;
     },
+    // addProvince(state, payload) {
+    //   state.province = payload;
+    // },
   },
   actions: {},
 });

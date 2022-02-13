@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3176789 */
+  src: url("//at.alicdn.com/t/font_3176789_d0rin0pglpa.woff2?t=1644631588306")
+      format("woff2"),
+    url("//at.alicdn.com/t/font_3176789_d0rin0pglpa.woff?t=1644631588306")
+      format("woff"),
+    url("//at.alicdn.com/t/font_3176789_d0rin0pglpa.ttf?t=1644631588306")
+      format("truetype");
+}
+.iconfont {
+  font-family: "iconfont" !important;
+}
 /* 把我们所有标签的内外边距清零 */
 * {
   margin: 0;

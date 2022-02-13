@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <h3>疫情地图</h3>
     <van-tabs
       animated
@@ -9,10 +9,10 @@
       title-active-color="#0fa8b0"
     >
       <van-tab title="现存确诊">
-        <div id="main1" style="width: 3.6rem; height: 3rem">This is map</div>
+        <div id="main1">This is map</div>
       </van-tab>
       <van-tab title="累计确诊">
-        <div id="main2" style="width: 3.6rem; height: 3rem">haha</div>
+        <div id="main2">haha</div>
       </van-tab>
     </van-tabs>
   </div>
@@ -27,22 +27,41 @@ export default {
     ...mapState(["sectionConfirmedData"]),
     ...mapState(["sectionCurConfirmedData"]),
   },
+  created() {
+    console.log(this.sectionCurConfirmedData);
+  },
+  watch: {
+    //当vuex数据变化时,渲染地图
+    sectionCurConfirmedData() {
+      console.log("watch被调用了");
+      this.$nextTick(() => {
+        this.getMap("main1", this.sectionCurConfirmedData);
+      });
+    },
+  },
   mounted() {
+    //待dom渲染完成之后再渲染地图
     this.$nextTick(() => {
-      this.getMap("main1", this.sectionConfirmedData);
+      this.getMap("main1", this.sectionCurConfirmedData);
     });
   },
-  updated() {},
   methods: {
     //获取echarts中国地图
     getMap(id, dataArr) {
       console.log(document.getElementById(id));
       let myChart = echarts.init(document.getElementById(id));
       // 绘制图表
-      let option = {
+      const option = {
+        tooltip: {
+          triggerOn: "click",
+          enterable: true,
+          formatter(data) {
+            return `<a style="color:white" href="#/${data.name}">&nbsp; ${data.name}: ${data.value} &nbsp; | &nbsp; 查看详情 > </a> `;
+          },
+        },
         visualMap: {
           //地图图例
-          orient: "horizontal", //水平排布
+          orient: "colomn", //水平排布
           show: true,
           left: 24,
           bottom: 0,
@@ -50,32 +69,33 @@ export default {
           pieces: [
             //根据数据大小，各省显示不同颜色
             {
-              gte: 100,
-              label: ">= 1000",
-              color: "#1f307b",
+              gte: 10000,
+              label: ">= 10000",
+              color: "#b80909",
             },
             {
-              gte: 500,
+              gte: 1000,
+              lt: 9999,
+              label: "1000 - 9999",
+              color: "#e64546",
+            },
+            {
+              gte: 100,
               lt: 999,
-              label: "500 - 999",
-              color: "#3c57ce",
-            },
-            {
-              gte: 100,
-              lt: 499,
-              label: "100 - 499",
-              color: "#6f83db",
+              label: "100 - 999",
+              color: "#f57567",
             },
             {
               gte: 10,
               lt: 99,
               label: "10 - 99",
-              color: "#9face7",
+              color: "#ff9985",
             },
             {
+              gte: 1,
               lt: 10,
-              label: "<10",
-              color: "#bcc5ee",
+              label: "1-9",
+              color: "#ffe5db",
             },
           ],
         },
@@ -86,8 +106,8 @@ export default {
             min: 1,
             max: 3,
           },
-          zoom: 1, //地图缩放比例
 
+          y: 20,
           label: {
             normal: {
               show: true, //是否显示文字
@@ -125,9 +145,14 @@ export default {
       myChart.setOption(option);
     },
 
-    getCurConfirmedMap() {
+    getCurConfirmedMap(title) {
       this.$nextTick(() => {
-        this.getMap("main2", this.sectionCurConfirmedData);
+        if (title === 0) {
+          this.getMap("main1", this.sectionCurConfirmedData);
+        }
+        if (title === 1) {
+          this.getMap("main2", this.sectionConfirmedData);
+        }
       });
     },
     shit() {
@@ -138,13 +163,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div {
-  margin-top: 0.1rem;
+.box {
+  margin-top: 0.2rem;
   font-size: 0.15rem;
 }
 h3 {
   border-left: 0.1rem #0ea7af solid;
   padding-left: 0.1rem;
   margin-left: 0.1rem;
+}
+#main1,
+#main2 {
+  background-color: rgb(248, 249, 250);
+  height: 3.5rem;
 }
 </style>
