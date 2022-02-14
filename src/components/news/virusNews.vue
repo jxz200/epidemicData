@@ -44,6 +44,7 @@ export default {
   i {
     border-left: 0.1rem #0ea7af solid;
     margin-right: 0.1rem;
+    margin-left: 0.08rem;
   }
   img {
     width: 0.8rem;

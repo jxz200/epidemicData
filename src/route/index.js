@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/home/Home.vue";
 import SelectProvince from "../components/selectProvince/SelectProvince.vue";
 import Country from "../views/country/country.vue";
-import Province from "../views/province/province.vue";
+// import Province from "../views/province/province.vue";
 //第三方库需要use一下才能用
 Vue.use(VueRouter);
 
@@ -14,6 +14,7 @@ const routes = [
   },
   {
     path: "/home",
+    redirect: "/home/country",
     component: Home,
     children: [
       {
@@ -21,8 +22,8 @@ const routes = [
         component: Country,
       },
       {
-        path: "province",
-        component: Province,
+        path: "province/:provinceName",
+        component: () => import("../views/province/province.vue"),
       },
     ],
   },

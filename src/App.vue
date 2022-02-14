@@ -9,17 +9,17 @@ export default {
   name: "App",
   data() {
     return {
-      clientWidth: document.documentElement.clientWidth,
+      // clientWidth: document.documentElement.clientWidth,
     };
   },
   watch: {
-    clientWidth() {
-      window.location.reload();
-    },
+    // clientWidth() {
+    //   window.location.reload();
+    // },
   },
   mounted() {
     this.isMobile();
-    this.watchWidth();
+    // this.watchWidth();
   },
   methods: {
     //用户用pc访问时弹出弹框
@@ -30,13 +30,13 @@ export default {
       }
     },
     //用户改变窗口宽度时强制刷新
-    watchWidth() {
-      const that = this;
-      window.onresize = function () {
-        that.clientWidth = document.documentElement.clientWidth;
-        console.log(that.clientWidth);
-      };
-    },
+    // watchWidth() {
+    //   const that = this;
+    //   window.onresize = function () {
+    //     that.clientWidth = document.documentElement.clientWidth;
+    //     console.log(that.clientWidth);
+    //   };
+    // },
   },
 };
 </script>

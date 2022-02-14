@@ -10,7 +10,7 @@
       >
         <van-tab title="疫情热点 "> <VirusNews></VirusNews> </van-tab>
         <van-tab title="疫情数据"> <VirusData></VirusData> </van-tab>
-        <van-tab title="疫情地图 "> <VirusMap></VirusMap> </van-tab>
+        <van-tab title="疫情地图 "> <VirusMap :key="key"></VirusMap> </van-tab>
       </van-tabs>
     </div>
   </div>
@@ -26,17 +26,25 @@ export default {
   data() {
     return {
       virusNews: [],
+      key: 1,
+      clientWidth: 0,
     };
   },
-
   components: {
     VirusNews,
     VirusData,
     VirusMap,
   },
   created() {
+    sessionStorage.clear(); //清除存储，让右上角的省份变为默认的切换省份
     this.StoreVirusData();
     this.StoreSectionData();
+    this.watchWidth();
+  },
+  watch: {
+    clientWidth() {
+      this.key++;
+    },
   },
   methods: {
     //调用store的addVirusNews
@@ -80,6 +88,15 @@ export default {
       const { desc, news } = list;
       this.addVirusNews(news); //调用store里的action方法
       this.addVirusInfo(desc);
+    },
+    //监听窗口的宽度，一旦窗口变化，就记录clienteidth
+    watchWidth() {
+      const that = this;
+      window.onresize = function () {
+        console.log("sesize被调用了");
+        that.clientWidth = document.documentElement.clientWidth;
+        console.log(that.clientWidth);
+      };
     },
   },
 };

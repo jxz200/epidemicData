@@ -8,6 +8,13 @@
         <p class="iconfont">新型冠状病毒</p>
         <h1>疫情实时数据报告</h1>
       </div>
+      <div
+        class="backToHome iconfont"
+        @click="$router.push('/home')"
+        v-show="$route.params.provinceName"
+      >
+        回到首页
+      </div>
     </header>
     <router-view></router-view>
   </div>
@@ -16,8 +23,13 @@
 <script>
 export default {
   computed: {
+    //回到主页时，是切换省份，没有storage时是切换省份，其余都是省份值
     province() {
-      return sessionStorage.getItem("province") || "切换省份";
+      if (this.$route.path === "/home/country") {
+        return "切换省份";
+      } else {
+        return this.$route.params.provinceName || "切换省份";
+      }
     },
   },
 };
@@ -67,6 +79,20 @@ header {
     margin-top: 0.05rem;
     font-size: 0.28rem;
     text-shadow: black;
+  }
+  .backToHome {
+    height: 0.22rem;
+    line-height: 0.22rem;
+    font-size: 0.16rem;
+    margin-top: 0.09rem;
+    text-align: center;
+    width: 1.1rem;
+    background-image: linear-gradient(270deg, #00c1c1, #00b6d2);
+    border: 1px solid rgba(196, 250, 255, 0.3);
+    border-radius: 0.14rem;
+    &::before {
+      content: "\e7c6";
+    }
   }
 }
 </style>

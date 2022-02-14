@@ -95,10 +95,11 @@ export default {
     this.indexList = this.province.map((item) => item.title);
   },
   methods: {
+    //跳转回主页并记录选择好的城市
     jump(e) {
       console.log(e.target.innerText);
       sessionStorage.setItem("province", e.target.innerText);
-      this.$router.go(-1);
+      this.$router.push(`/home/province/${e.target.innerText}`);
     },
   },
 };

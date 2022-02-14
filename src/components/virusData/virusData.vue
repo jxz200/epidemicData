@@ -94,13 +94,14 @@ div {
   margin-top: 0.1rem;
   font-size: 0.15rem;
   h3 {
+    margin-left: 0.08rem;
     border-left: 0.1rem #0ea7af solid;
     padding-left: 0.1rem;
   }
   .time {
     color: gray;
     padding-left: 0.3rem;
-    margin-top: 0.05rem;
+    margin-top: 0.1rem;
     font-size: 0.14rem;
     display: flex;
     align-items: center;

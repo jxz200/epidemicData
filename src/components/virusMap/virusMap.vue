@@ -33,9 +33,17 @@ export default {
   watch: {
     //当vuex数据变化时,渲染地图
     sectionCurConfirmedData() {
-      console.log("watch被调用了");
       this.$nextTick(() => {
         this.getMap("main1", this.sectionCurConfirmedData);
+      });
+    },
+    clientWidth() {
+      console.log("width被调用了");
+      this.showMap = false;
+
+      this.$nextTick(() => {
+        this.showMap = true;
+        // this.getMap("main1", this.sectionCurConfirmedData);
       });
     },
   },
@@ -56,7 +64,7 @@ export default {
           triggerOn: "click",
           enterable: true,
           formatter(data) {
-            return `<a style="color:white" href="#/${data.name}">&nbsp; ${data.name}: ${data.value} &nbsp; | &nbsp; 查看详情 > </a> `;
+            return `<a style="color:white" href="#/home/province/${data.name}">&nbsp; ${data.name}: ${data.value} &nbsp; | &nbsp; 查看详情 > </a> `;
           },
         },
         visualMap: {
@@ -141,10 +149,9 @@ export default {
           },
         ],
       };
-
       myChart.setOption(option);
     },
-
+    //累计和现有地图切换
     getCurConfirmedMap(title) {
       this.$nextTick(() => {
         if (title === 0) {
@@ -154,9 +161,6 @@ export default {
           this.getMap("main2", this.sectionConfirmedData);
         }
       });
-    },
-    shit() {
-      console.log("你好");
     },
   },
 };
@@ -168,9 +172,10 @@ export default {
   font-size: 0.15rem;
 }
 h3 {
+  // margin-left: 0.08rem;
   border-left: 0.1rem #0ea7af solid;
   padding-left: 0.1rem;
-  margin-left: 0.1rem;
+  margin-left: 0.18rem;
 }
 #main1,
 #main2 {
