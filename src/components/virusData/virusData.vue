@@ -1,54 +1,56 @@
 <template>
-  <div>
+  <div class="container">
     <i class="decoration"></i>
     <h3>国内疫情</h3>
     <p class="time">数据更新至 {{ virusInfo.modifyTime | time }}</p>
-    <div class="virusData">
-      <div class="firstLine">
-        <ul>
-          <p>现有确诊</p>
-          <span>{{ virusInfo.currentConfirmedCount | comma }}</span>
-          <p>
-            较昨日 <i>{{ virusInfo.currentConfirmedIncr | modifyNumber }}</i>
-          </p>
-        </ul>
-        <ul class="">
-          <p>累计死亡</p>
-          <span>{{ virusInfo.deadCount | comma }}</span>
-          <p>
-            较昨日 <i>{{ virusInfo.deadIncr | modifyNumber }}</i>
-          </p>
-        </ul>
-        <ul class="">
-          <p>累计确诊</p>
-          <span>{{ virusInfo.confirmedCount | comma }}</span>
-          <p>
-            较昨日 <i>{{ virusInfo.confirmedIncr | modifyNumber }}</i>
-          </p>
-        </ul>
-      </div>
-      <div class="secondLine">
-        <ul class="">
-          <p>累计治愈</p>
-          <span>{{ virusInfo.curedCount | comma }}</span>
-          <p>
-            较昨日 <i>{{ virusInfo.curedIncr | modifyNumber }}</i>
-          </p>
-        </ul>
-        <ul class="">
-          <p>累计境外输入</p>
-          <span>{{ virusInfo.suspectedCount | comma }}</span>
-          <p>
-            较昨日 <i>{{ virusInfo.suspectedIncr | modifyNumber }}</i>
-          </p>
-        </ul>
-        <ul class="">
-          <p>现存无症状</p>
-          <span>{{ virusInfo.seriousCount | comma }}</span>
-          <p>
-            较昨日 <i>{{ virusInfo.seriousIncr | modifyNumber }}</i>
-          </p>
-        </ul>
+    <div class="virusDataBox">
+      <div class="virusData">
+        <div class="firstLine">
+          <ul>
+            <p>现有确诊</p>
+            <span>{{ virusInfo.currentConfirmedCount | comma }}</span>
+            <p>
+              较昨日 <i>{{ virusInfo.currentConfirmedIncr | modifyNumber }}</i>
+            </p>
+          </ul>
+          <ul class="">
+            <p>累计死亡</p>
+            <span>{{ virusInfo.deadCount | comma }}</span>
+            <p>
+              较昨日 <i>{{ virusInfo.deadIncr | modifyNumber }}</i>
+            </p>
+          </ul>
+          <ul class="">
+            <p>累计确诊</p>
+            <span>{{ virusInfo.confirmedCount | comma }}</span>
+            <p>
+              较昨日 <i>{{ virusInfo.confirmedIncr | modifyNumber }}</i>
+            </p>
+          </ul>
+        </div>
+        <div class="secondLine">
+          <ul class="">
+            <p>累计治愈</p>
+            <span>{{ virusInfo.curedCount | comma }}</span>
+            <p>
+              较昨日 <i>{{ virusInfo.curedIncr | modifyNumber }}</i>
+            </p>
+          </ul>
+          <ul class="">
+            <p>累计境外输入</p>
+            <span>{{ virusInfo.suspectedCount | comma }}</span>
+            <p>
+              较昨日 <i>{{ virusInfo.suspectedIncr | modifyNumber }}</i>
+            </p>
+          </ul>
+          <ul class="">
+            <p>现存无症状</p>
+            <span>{{ virusInfo.seriousCount | comma }}</span>
+            <p>
+              较昨日 <i>{{ virusInfo.seriousIncr | modifyNumber }}</i>
+            </p>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -75,21 +77,14 @@ export default {
     },
     //时间戳转换
     time(value) {
-      let d = new Date(value);
-      let year = d.getFullYear();
-      let month = d.getMonth() + 1;
-      let day = d.getDate();
-      let hour = d.getHours();
-      let minute = d.getMinutes();
-      let second = d.getSeconds();
-      return `${year}.${month}.${day} ${hour}:${minute}:${second}`;
+      return new Date(value).toLocaleString("chinese", { hour12: false });
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-div {
+.container {
   padding: 0 0.1rem;
   margin-top: 0.1rem;
   font-size: 0.15rem;
@@ -99,7 +94,7 @@ div {
     padding-left: 0.1rem;
   }
   .time {
-    color: gray;
+    color: #999;
     padding-left: 0.3rem;
     margin-top: 0.1rem;
     font-size: 0.14rem;
@@ -120,7 +115,14 @@ div {
     }
   }
 }
+.virusDataBox {
+  margin-top: 0.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .virusData {
+  width: 3.3rem;
   border-radius: 0.2rem;
   box-shadow: 0px 0px 0.04rem #7d7d7d;
   height: 2.2rem;
