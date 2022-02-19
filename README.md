@@ -1,3 +1,32 @@
-简介：移动端新冠疫情信息和数据展示网站，有国内外疫情实时数据展示，疫情最新消息等功能
-技术要点： 1.使用 vw + rem + 媒体查询进行移动端适配 2. 使用 async await 语法糖获取 axios 返回结果 3.使用 props,vuex 进行组件间动态数据传递 4.使用 vant 移动端组件库进行页面搭建 5.使用路由懒加载进行首屏加载优化 5.将插件额外放一个模块 6.使用 e-charts 进行疫情地图渲染 7.使用 vue-router 将 home 放在 views 下的 home 文件夹里 8.这只是一个测试罢了
-9.监听window.onresize时一定要改变this指向
+#### **简介**：
+
+基于vue的移动端新冠疫情信息和数据展示网站，有疫情实时数据，疫情最新消息, 疫情地图等功能
+
+#### 安装教程：
+
+1.  使用git
+
+```
+下载git工具，在对应项目文件夹下右键然后 Git Bash Here
+```
+
+2.  克隆项目
+
+```
+git clone https://gitee.com/q2513102/vue_shop
+```
+
+3.  安装依赖
+
+```
+cnpm install
+```
+
+#### api数据：
+
+1. http://api.tianapi.com/ncov/index?key=d619b8c2f104bb099ae157aa90951225 (天行数据)
+2. https://yspm.api.storeapi.net/api/94/219?format=json&appid=13935&sign=3908a8a8e8cbb5def9bbe9995d8bcaa6 (挖数据)
+
+#### 在线预览：
+
+http://82.157.53.89/

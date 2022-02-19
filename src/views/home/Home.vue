@@ -81,6 +81,7 @@ header {
     text-shadow: black;
   }
   .backToHome {
+    cursor: pointer;
     height: 0.22rem;
     line-height: 0.22rem;
     font-size: 0.16rem;

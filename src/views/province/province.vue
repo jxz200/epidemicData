@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     async getSectionData() {
-      // const result2 = await api.getSectionData(); //获取各地区数据
+      const result2 = await api.getSectionData(); //获取各地区数据
       const allSectionsData = result2.data.retdata;
       this.sectionData = allSectionsData.find(
         (item) => item.xArea === this.provinceName

@@ -75,6 +75,7 @@ export default {
       }
     }
     .newsTextBox {
+      cursor: pointer;
       border-radius: 0.1rem;
       margin-top: 0.1rem;
       padding-left: 0.1rem;

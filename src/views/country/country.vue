@@ -1,13 +1,7 @@
 <template>
   <div>
     <div class="views">
-      <van-tabs
-        scrollspy
-        sticky
-        color="#0fa8b0"
-        line-width="1rem"
-        title-active-color="#0fa8b0"
-      >
+      <van-tabs scrollspy sticky color="#0fa8b0" line-width="1rem" title-active-color="#0fa8b0">
         <van-tab title="疫情热点 "> <VirusNews></VirusNews> </van-tab>
         <van-tab title="疫情数据"> <VirusData></VirusData> </van-tab>
         <van-tab title="疫情地图 "> <VirusMap :key="key"></VirusMap> </van-tab>
@@ -67,17 +61,11 @@ export default {
     //获取中国各地区疫情数据并储存在vuex中
     async StoreSectionData() {
       // const result2 = {};
-      // const result2 = await api.getSectionData(); //获取各地区数据
+      const result2 = await api.getSectionData(); //获取各地区数据
       console.log(result2);
       const sectionDataArray = result2.data.retdata;
-      const cleanedConfirmedsectionData = this.SectionDataFilter(
-        sectionDataArray,
-        "confirm"
-      );
-      const cleanedCurConfirmedsectionData = this.SectionDataFilter(
-        sectionDataArray,
-        "curConfirm"
-      );
+      const cleanedConfirmedsectionData = this.SectionDataFilter(sectionDataArray, "confirm");
+      const cleanedCurConfirmedsectionData = this.SectionDataFilter(sectionDataArray, "curConfirm");
       this.addSectionConfirmedData(cleanedConfirmedsectionData);
       this.addSectionCurConfirmedData(cleanedCurConfirmedsectionData);
     },
