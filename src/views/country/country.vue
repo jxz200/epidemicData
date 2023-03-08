@@ -31,7 +31,6 @@ export default {
   },
   created() {
     sessionStorage.clear(); //清除存储，让右上角的省份变为默认的切换省份
-    this.StoreVirusData();
     this.StoreSectionData();
     this.watchWidth();
   },
@@ -70,12 +69,14 @@ export default {
       this.addSectionCurConfirmedData(cleanedCurConfirmedsectionData);
     },
     //获取疫情数据并储存在vuex中
-    async StoreVirusData() {
-      const result1 = await api.getEpidemicData(); //获取疫情新闻和基本信息
-      const list = result1.data.newslist[0]; //list包含desc，news，是我真正想要的数据
-      const { desc, news } = list;
-      this.addVirusNews(news); //调用store里的action方法
-      this.addVirusInfo(desc);
+    StoreVirusData() {
+      // api.getEpidemicData().then(res => {
+      //   console.log(res,"res")
+      //   console.log(res.data.results[0])
+      //
+      // }); //获取疫情新闻和基本信息
+      // this.addVirusNews(news); //调用store里的action方法
+      // this.addVirusInfo(desc);
     },
     //监听窗口的宽度，一旦窗口变化，就记录clienteidth
     watchWidth() {

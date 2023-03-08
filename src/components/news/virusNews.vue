@@ -4,20 +4,35 @@
     <img src="../../assets/image/hot.png" alt="" />
     <div v-for="item in virusNews" :key="item.index" class="hotNews">
       <span class="time">
-        {{ time(item.pubDate) }}
+<!--        {{ time(item.pubDate) }}-->
       </span>
-      <div class="newsTextBox iconfont" @click="jumpTo(item.sourceUrl)">
+      <div class="newsTextBox iconfont" @click="jumpTo(item.link)">
         {{ item.title }}
+
       </div>
+      
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import api from "../../api";
+
 export default {
   created() {
+    api.getNews().then(res =>{
+      const neededList = res.data.data.components[1].data.map((item) => item.item.info.interactionInfo.shareInfo)
+      console.log(neededList,"nl")
+      this.virusNews = neededList
+
+    })
     console.log(this.virusNews);
+  },
+  data(){
+    return{
+      virusNews:[]
+    }
   },
   computed: {
     time() {
@@ -27,7 +42,7 @@ export default {
         });
       };
     },
-    ...mapState(["virusNews"]),
+
   },
   methods: {
     jumpTo(url) {

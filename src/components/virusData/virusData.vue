@@ -2,7 +2,7 @@
   <div class="container">
     <i class="decoration"></i>
     <h3>国内疫情</h3>
-    <p class="time">数据更新至 {{ virusInfo.modifyTime | time }}</p>
+    <p class="time">数据更新至 {{ virusInfo.updateTime| time }}</p>
     <div class="virusDataBox">
       <div class="virusData">
         <div class="firstLine">
@@ -58,13 +58,20 @@
 
 <script>
 import { mapState } from "vuex";
+import api from "../../api";
+
 export default {
   created() {
     console.log(this.virusInfo);
+    api.getEpidemicData().then(res => {
+      this.virusInfo =res.data.results[0]
+
+    });
   },
-  computed: {
-    //获取store里的数据
-    ...mapState(["virusInfo"]),
+  data(){
+    return{
+      virusInfo:{}
+    }
   },
   filters: {
     //增加的数字若为非负，则前面加一个 + 号
